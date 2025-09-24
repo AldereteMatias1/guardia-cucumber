@@ -1,3 +1,4 @@
+import { VitalSign } from "src/vital-signs/entities/vital-sign.entity";
 
 export class Patient {
   id: string;           // lo genera el sistema
@@ -7,4 +8,6 @@ export class Patient {
   phone: string;
   country: string;
   obraSocial: string;
+  vitalSigns:VitalSign;
 }
+
