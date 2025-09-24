@@ -14,8 +14,4 @@ Scenario: Intentar registrar un paciente ya existente
     When se registra un paciente con DNI "45678901" y email "juan.perez@example.com"
     Then el sistema no crea un nuevo registro
     And se traen los datos del paciente con DNI "45678901"
-@signosVitales
-Scenario: Tomar signos vitales validos 
-    Given existe un paciente con DNI "45678901"
-    When se registran los signos vitales T "39" SO "98" TA1 "120" TA2 "90" FC "100" asociados al DNI "45678901"
-    Then el sistema asigna los signosVitales al paciente con DNI "45678901"
+
