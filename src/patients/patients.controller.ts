@@ -1,4 +1,4 @@
-import { Controller, Get,Post,Body } from '@nestjs/common';
+import { Controller, Get,Post,Body, Param } from '@nestjs/common';
 import { PatientsService } from './patients.service';
 import { createPatientDto } from './dto/create-patient.dto';
 
@@ -8,6 +8,10 @@ export class PatientsController {
   @Get()
   getAllPatients(){
     return this.patientsService.findAll();
+  }
+  @Get(':dni')
+  getOnePatient(@Param('dni') dni: string){
+    return this.patientsService.findOne(dni);
   }
   @Post()
   createPatient(@Body()data:createPatientDto){
