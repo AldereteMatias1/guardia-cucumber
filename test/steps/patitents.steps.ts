@@ -27,8 +27,23 @@ Before(async()=>{
 
     http = request(app.getHttpServer()) as unknown as SuperTest<Test>;
 }); //entonces configuramos la app test previa al escenario
+
 Given(
     'existe un paciente con DNI {string} y email {string}',
+    async (dni:string,email:string)=>{
+        await http.post('/patients').send({
+            dni,
+            birthdate:'1995-08-21',
+            email,
+            phone: '+5493816543210',
+            country: 'Argentina',
+            obraSocial: 'OSDE',
+        })
+    }
+)
+
+Given(
+    'no existe un paciente con DNI {string} ni email {string}',
     async (dni:string,email:string)=>{
         await http.post('/patients').send({
             dni,
@@ -54,6 +69,22 @@ When(
         }); //es al pedo mandar los otros campos aqui? ver de cambiar el dto pq no deberian ser opcionales el del create-patient.dto
     }
 );
+
+Then('el sistema guarda al paciente', () => {
+  // Si tu API retorna 201 al crear
+  expect([200, 201]).to.include(lastResponse.status);
+  // Podés verificar que tenga id:
+  expect(lastResponse.body).to.have.property('id');
+});
+
+Then('se devuelven los datos del paciente con DNI {string}', (dni: string) => {
+  expect(lastResponse.body).to.have.property('dni', dni);
+});
+
+Then('el sistema no crea un nuevo registro', () => {
+  expect([200, 201, 409]).to.include(lastResponse.status);
+});
+
 //step:verificar que se devuelvan los datos del paciente
 Then('se traen los datos del paciente con DNI {string}',(dni:string)=>{
     //usamos los asserts de chai para obtener - preguntar a ivan cual uso
