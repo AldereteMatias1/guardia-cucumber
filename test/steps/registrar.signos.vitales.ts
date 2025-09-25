@@ -68,8 +68,9 @@ Then(
     }
 );
 
-Then('el sistema advierte que la temperatura T está fuera de rango', () => {
-  expect([400, 422]).to.include(lastResponse.status, 
-    `la temperatura esta fuera de rango`
-  ); 
+Then(/^el sistema advierte que (.+) está fuera de rango$/, (campo: string) => {
+  expect([400, 422]).to.include(
+    lastResponse.status,
+    `Se esperaba 400/422 cuando ${campo} está fuera de rango; fue ${lastResponse.status}`,
+  );
 });
