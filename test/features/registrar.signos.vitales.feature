@@ -11,10 +11,16 @@ Feature: Registrar Signos vitales
         When se registran los signos vitales T "39" SO "98" TA1 "120" TA2 "90" FC "100" asociados al DNI "45678901"
         Then el sistema asigna los signosVitales al paciente con DNI "45678901"
 
-    Scenario: Tomar signos vitales con temperatura fuera de rango por debajo
-        When se registran los signos vitales T "29" SO "98" TA1 "120" TA2 "90" FC "100" asociados al DNI "45678901"
-        Then el sistema advierte que la temperatura T está fuera de rango
-    
-    Scenario: Tomar signos vitales con temperatura fuera de rango por encima
-        When se registran los signos vitales T "51" SO "98" TA1 "120" TA2 "90" FC "100" asociados al DNI "45678901"
-        Then el sistema advierte que la temperatura T está fuera de rango
+    Scenario Outline: Tomar signos vitales fuera de rango
+        When se registran los signos vitales T "<temperatura>" SO "<saturacionOxigeno>" TA1 "<tensionMax>" TA2 "<tensionMin>" FC "<frecuenciaCardiaca>" asociados al DNI "45678901"
+        Then el sistema advierte que <campo> está fuera de rango
+
+        Examples:
+            | campo              | temperatura | saturacionOxigeno | tensionMax | tensionMin | frecuenciaCardiaca |
+            | temperatura T      | 29          | 98                | 120        | 90         | 100                 |
+            | temperatura T      | 51          | 98                | 120        | 90         | 100                 |
+            | saturacionOxigeno  | 39          | 10                | 120        | 90         | 100                 |
+            | saturacionOxigeno  | 39          | 150               | 120        | 90         | 100                 |
+            | tensionMax         | 39          | 98                | 30         | 90         | 100                 |
+            | tensionMin         | 39          | 98                | 120        | 10         | 100                 |
+            | frecuenciaCardiaca | 39          | 98                | 120        | 90         | 500                 |
