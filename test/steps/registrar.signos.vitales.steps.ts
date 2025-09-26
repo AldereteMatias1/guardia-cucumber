@@ -30,19 +30,7 @@ Before(async()=>{
 }); 
 
 //Scenario:Tomar signos vitales validos
-Given(
-    'existe un paciente con DNI {string}',
-    async (dni:string)=>{
-        await http.post('/patients').send({
-            dni,
-            birthdate:'1995-08-21',
-            email:"example@example.com",
-            phone: '+5493816543210',
-            country: 'Argentina',
-            obraSocial: 'OSDE',
-        });
-    }
-);
+
 let signosVitales:any;
 When(
   'se registran los signos vitales T {string} SO {string} TA1 {string} TA2 {string} FC {string} asociados al DNI {string}',

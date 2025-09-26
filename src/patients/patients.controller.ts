@@ -16,7 +16,7 @@ export class PatientsController {
   }
   @Post()
   createPatient(@Body()data:createPatientDto){
-    return this.patientsService.createNewPatient(data);
+    return this.patientsService.createNewPatient(data).patient;
   }
   @Patch(':dni')
   updateVitalSigns(@Body()data:UpdateVitalSignDto, @Param('dni') dni:string){
