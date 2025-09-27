@@ -11,5 +11,5 @@ export class CreateVitalSignDto {
     tensionMin:number;
     @IsNumber()@Min(20)@Max(250)
     frecuenciaCardiaca:number;
-    fechaRegistro:Date;
+    //fechaRegistro:Date;
 }

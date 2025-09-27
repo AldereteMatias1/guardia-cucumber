@@ -37,7 +37,7 @@ export class PatientsService {
     existing.vitalSigns = {
       ...existing.vitalSigns,
       ...data,
-      fechaRegistro : new Date()
+      //fechaRegistro : new Date()
     }
     return existing;
   }
