@@ -4,5 +4,5 @@ export class VitalSign {
     tensionMax:number;
     tensionMin:number;
     frecuenciaCardiaca:number;
-    fechaRegistro:Date;
+    //fechaRegistro:Date;
 }
